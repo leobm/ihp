@@ -8,11 +8,11 @@ import IHP.ServerSideComponent.ControllerFunctions as SSC
 import qualified Data.Aeson as Aeson
 import qualified Text.Blaze.Html.Renderer.Text as Blaze
 
-instance (Component component controller, FromJSON controller) => WSApp (ComponentsController component) where
+instance (Component component controller props, FromJSON controller) => WSApp (ComponentsController component) where
     initialState = ComponentsController
 
     run = do
-        let state :: component = SSC.initialState
+        let state :: component = SSC.initialState Nothing
         instanceRef <- newIORef (ComponentInstance { state })
         let ?instanceRef = instanceRef
 

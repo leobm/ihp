@@ -23,7 +23,7 @@ $(Aeson.deriveJSON Aeson.defaultOptions { sumEncoding = defaultTaggedObject { ta
 $(Aeson.deriveJSON Aeson.defaultOptions { sumEncoding = defaultTaggedObject { tagFieldName = "type" }} ''Node)
 $(Aeson.deriveJSON Aeson.defaultOptions { sumEncoding = defaultTaggedObject { tagFieldName = "type" }} ''NodeOperation)
 
-setState :: (?instanceRef :: IORef (ComponentInstance state), ?connection :: WebSocket.Connection, Component state action, ?context :: ControllerContext) => state -> IO ()
+setState :: (?instanceRef :: IORef (ComponentInstance state), ?connection :: WebSocket.Connection, Component state action props, ?context :: ControllerContext) => state -> IO ()
 setState state = do
     oldState <- get #state <$> readIORef ?instanceRef
     let oldHtml = oldState

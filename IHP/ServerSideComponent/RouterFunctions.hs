@@ -19,9 +19,9 @@ import IHP.ControllerSupport
 import IHP.ApplicationContext
 import IHP.RouterSupport (RouteParser)
 
-routeComponent :: forall component controller application.
+routeComponent :: forall component controller props application.
     ( Typeable component
-    , Component component controller
+    , Component component controller props
     , FromJSON controller
     , InitControllerContext application
     , Typeable application
