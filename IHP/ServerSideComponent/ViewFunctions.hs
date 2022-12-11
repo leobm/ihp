@@ -13,10 +13,10 @@ import IHP.HSX.QQ (hsx)
 import qualified Data.Typeable as Typeable
 
 component :: forall component action props. (Component component action props, Typeable component) => Html
-component = componentWithProps @component Nothing
+component = componentFromState $ initialState @component Nothing
 
-componentWithProps :: forall component action props. (Component component action props, Typeable component) => Maybe props -> Html
-componentWithProps props = componentFromState $ initialState @component props
+componentWithProps :: forall component action props. (Component component action props, Typeable component) => props -> Html
+componentWithProps props = componentFromState $ initialState @component (Just props)
 
 componentFromState :: forall component action props. (Component  component action props, Typeable component) => component -> Html
 componentFromState state = [hsx|<div class="ihp-ssc" data-path={path}>{render state}</div>|]

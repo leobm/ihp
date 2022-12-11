@@ -45,8 +45,8 @@ data CounterController
 
 $(deriveSSC ''CounterController)
 
-instance Component Counter CounterController where
-    initialState = Counter { value = 0 }
+instance Component Counter CounterController () where
+    initialState _ = Counter { value = 0 }
 
     -- The render function
     render Counter { value } = [hsx|
@@ -69,6 +69,8 @@ instance Component Counter CounterController where
 
 instance SetField "value" Counter Int where setField value' counter = counter { value = value' }
 ```
+
+Each component definition Definition needs three type information. First the type of the state object, the type of the possible controller actions and the properties type, if the components should get properties from outside. In our counter example the properties type is Unit. 
 
 You can see that the `Counter` component has a state object with a number `data Counter = Counter { value :: !Int }`. It has two actions `IncrementCounterAction` and `SetCounterValue`. The [`initialState = Counter { value = 0 }`](https://ihp.digitallyinduced.com/api-docs/IHP-ServerSideComponent-Types.html#v:initialState) means that the counter starts at 0.
 
@@ -146,6 +148,8 @@ scripts = [hsx|
 Now when opening the `WelcomeView` you will see the newly created counter.
 
 ## Advanced
+
+### Component with Properties
 
 ### Actions with Parameters
 
