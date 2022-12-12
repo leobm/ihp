@@ -8,7 +8,7 @@ module IHP.ServerSideComponent.Types where
 import IHP.ViewPrelude
 import qualified Network.WebSockets as WebSocket
 
-class Component state action props | state -> action, state -> props where
+class (ToJSON props, FromJSON props) => Component state action props | state -> action, state -> props where
     initialState :: Maybe props -> state
     render :: state -> Html
     action ::
